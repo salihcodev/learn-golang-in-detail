@@ -1,0 +1,3 @@
+Hello world this is test file for io operations
+also don't forget to say hello to my uncle too
+today is the time and good day for doing good things
