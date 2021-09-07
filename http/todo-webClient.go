@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type todo struct {
+type todoBluePrint struct {
 	UserId    int    `json:"userId"`
 	ID        int    `json:"id"`
 	Title     string `json:"title"`
@@ -30,7 +30,7 @@ func appHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer res.Body.Close()
-	var todoI todo
+	var todoI todoBluePrint
 
 	if err = json.NewDecoder(res.Body).Decode(&todoI); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
