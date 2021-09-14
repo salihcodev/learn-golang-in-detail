@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 )
@@ -29,7 +30,12 @@ func appHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	defer res.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	}(res.Body)
 	var todoI todoBluePrint
 
 	if err = json.NewDecoder(res.Body).Decode(&todoI); err != nil {
@@ -59,6 +65,13 @@ func appHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.New("todo")
 
 	// #3
-	tmpl.Parse(todoStructure)
-	tmpl.Execute(w, todoI)
+	_, err = tmpl.Parse(todoStructure)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	err = tmpl.Execute(w, todoI)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
