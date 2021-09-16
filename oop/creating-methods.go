@@ -27,7 +27,16 @@ func (p Path) GetDistance() (sum float64) {
 	return sum
 }
 
+type N string
+
+func (n N) GetName() {
+	fmt.Println("Hello,", n)
+}
+
 func main() {
+	// simple method
+	var name N = "Ahmad"
+	name.GetName() // Hello, Ahmad
 
 	someLine := Line{Point{5, 9}, Point{30, 78}}
 	somePath := Path{{1, 3}, {7, 4}, {8, 13}, {21, 30}}

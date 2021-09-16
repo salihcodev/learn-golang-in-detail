@@ -17,13 +17,13 @@ type Year struct {
 	an inheritance. But it's not. (no overriding)
 */
 func (m Month) String() string {
-	return fmt.Sprintf("Week number: %d, Day number: %d", m.Week, m.Day)
+	return fmt.Sprintf("Week number: %d, Day number: %d !!", m.Week, m.Day)
 }
 
 // @1
-func (y Year) String() string {
-	return fmt.Sprintf("Week number: %d, Day number: %d, Current season: %s", y.Week, y.Day, y.Season)
-}
+//func (y Year) String() string {
+//	return fmt.Sprintf("Week number: %d, Day number: %d, Current season: %s", y.Week, y.Day, y.Season)
+//}
 
 // PrintWeakNum @2
 func PrintWeakNum(m Month) string {

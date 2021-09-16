@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 // first web-server
@@ -15,5 +16,6 @@ func main() {
 }
 
 func basicHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(time.Duration(10) * time.Second) // this line just for testing ctx handler.
 	fmt.Fprintf(w, "Hello world from %s\n", r.URL.Path[1:])
 }
