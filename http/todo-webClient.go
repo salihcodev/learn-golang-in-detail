@@ -45,7 +45,7 @@ func appHandler(w http.ResponseWriter, r *http.Request) {
 
 	/*
 		create html template
-			- create the todo html structure  #1
+			- create the _todo html structure  #1
 			- inject it to the template  #2
 			- parsing, then executing  #3
 	*/
