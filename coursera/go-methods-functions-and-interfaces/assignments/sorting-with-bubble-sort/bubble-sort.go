@@ -32,28 +32,26 @@ func Swap(data []int, idx int) {
 	temp := data[idx]
 	data[idx] =  data[idx+1]
 	data[idx+1] =  temp
+
+	// another solution:
+	//data[idx], data[idx+1] = data[idx+1], data[idx]
 }
 
 func BubbleSort(slice []int) {
-	for i := len(slice); i > 0; i-- {
+	isSwapped:= true
+
+	for isSwapped {
 		/*
 			make swap flag to check every time, is the swap happened or not
 			coz if it not, then there is no need for complete sorting the given data.
 		*/
+		isSwapped = false
 
-		isSwapped:= false
-
-		for k := 0; k < i - 1; k++ {
-			// check to swap
-			if slice[k] > slice[k+1] {
-				// swap
-				Swap(slice, k)
+		for i := 0; i < len(slice)-1; i++ {
+			if slice[i] > slice[i+1] {
+				Swap(slice, i)
 				isSwapped = true
 			}
-		}
-
-		if isSwapped {
-			break
 		}
 	}
 }
