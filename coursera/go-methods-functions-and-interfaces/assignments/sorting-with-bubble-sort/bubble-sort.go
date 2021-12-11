@@ -1,32 +1,9 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-func HandleEndUser(slice *[]int) {
-	var input string
+const EndUserMsg = "Please add sequence of numbers to sort like 9,-1,3: "
 
-	// get the numbers sequence
-	fmt.Print("Please add sequence of numbers to sort like 361: ")
-	_, err := fmt.Scanln(&input)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// loop over the string input
-	for _, val := range input {
-		// convert string to int
-		elm, err := strconv.Atoi(string(val))
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		// append converted element, to the slice
-		*slice = append(*slice, elm)
-	}
-}
 
 func Swap(data []int, idx int) {
 	temp := data[idx]
@@ -57,15 +34,31 @@ func BubbleSort(slice []int) {
 }
 
 
+func HandleEndUser(slice []int, err error) []int {
+	if err != nil {
+		return slice
+	}
+
+	var d int
+	n, err := fmt.Scanf("%d", &d)
+	if n == 1 {
+		slice = append(slice, d)
+	}
+
+	return HandleEndUser(slice, err)
+}
 
 func main() {
-	var sliceToSort []int
+
+	var slice []int
 
 	// get the user input and store it to be ready for sorting.
-	HandleEndUser(&sliceToSort)
+	fmt.Println("NOTE: Enter twice")
+	fmt.Print(EndUserMsg)
+	slice = HandleEndUser(slice, nil)
 
 	// sort the given slice
-	BubbleSort(sliceToSort)
+	BubbleSort(slice)
 
-	fmt.Println("Output In Sorted Way: ", sliceToSort)
+	fmt.Println("Output In Sorted Way: ", slice)
 }
