@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 /* ASSIGNMENT INFO
@@ -52,8 +53,8 @@ func HandleEndUser(a, v1, s1, t *float64) {
 }
 
 func DisplaceLow(a, v1, s1, t float64) float64 {
-	// s = ½ a t2 + vot + so
-	return (0.5*a)*(t*2) + (v1 * t) + s1
+	// s = ½ a t^2 + vot + so
+	return (0.5 * a * math.Pow(t,2)) + (v1 * t) + s1
 }
 
 func GenDisplaceFn(a, v1, s1 float64) func(time float64) float64 {
